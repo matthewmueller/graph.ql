@@ -66,6 +66,7 @@ var schema = Schema(`
   }
 
   type Query {
+    # Fetch the film by id
     film(id: Int): Film
   }
 `, {
