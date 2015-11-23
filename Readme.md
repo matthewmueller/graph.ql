@@ -1,29 +1,112 @@
 
 # graph.ql
 
-  Simpler interface for creating and querying GraphQL schemas
+  Faster and simpler technique for creating and querying GraphQL schemas. 100% compatible with the current GraphQL Schema spec.
 
-## License 
+## Features
 
-(The MIT License)
+- 100% compliance with the current GraphQL schema spec
+- Support for queries, mutations, and subscriptions
+- Input type support
+- Variable support
 
-Copyright (c) 2015 Matthew Mueller &lt;mattmuelle@gmail.com&gt;
+## graphql-js vs graph.ql
 
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
+Say we want to create a GraphQL schema that looks like this:
 
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
+```
+type Film {
+  title: String
+}
 
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+type Query {
+  film(id: Int): Film
+}
+```
+
+With [graphql-js](http://github.com/graphql/graphql-js), it would look like this:
+
+```js
+var graphql = require('graphql')
+
+var Film = new graphql.GraphQLObjectType({
+  name: 'Film',
+  fields: () => ({
+    title: {
+      type: graphql.GraphQLString
+    }
+  })
+})
+
+var schema = new graphql.GraphQLSchema({
+  query: new graphql.GraphQLObjectType({
+    name: 'Query'
+    fields: () => ({
+      film: {
+        type: Film,
+        args: {
+          id: {
+            description: 'Fetch the film by id',
+            type: graphql.GraphQLInt
+          }
+        },
+        resolve: (root, args) => return load_film(args.id)
+      }
+    })
+  })
+})
+```
+
+With `graph.ql`, it looks like this:
+
+```js
+var schema = Schema(`
+  type Film {
+    title: String
+  }
+
+  type Query {
+    film(id: Int): Film
+  }
+`, {
+  Query: {
+    film (root, args) {
+      return load_film(args.id)
+    }
+  }
+})
+```
+
+## Working with Variables
+
+After the schema has been created:
+
+```js
+schema(`
+  query fetch_film($id: Int) {
+    film (id: $id) {
+      title
+    }
+  }
+`, {
+  id: 1
+}).then(res => {
+  console.log(res.data)
+})
+```
+
+## Credits
+
+Thanks to [ForbesLindesay](https://github.com/ForbesLindesay) for his initial work on [graphql-schema-gen](https://github.com/ForbesLindesay/graphql-schema-gen) which laid the groundwork for this module.
+
+Thanks to the GraphQL team for an incredible spec as well as their [kitchen sink](https://github.com/graphql/graphql-js/tree/master/src/language/__tests__) documents to quickly test against the entire spec.
+
+## Run Tests
+
+```
+npm install
+```
+
+## License
+
+MIT
