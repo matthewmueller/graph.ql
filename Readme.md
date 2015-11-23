@@ -10,6 +10,90 @@
 - Input type support
 - Variable support
 
+## Installation
+
+```
+npm install graph.ql
+```
+
+## Example
+
+```js
+var Schema = require('graph.ql')
+
+// create the schema
+var schema = Schema(`
+  scalar Date
+
+  type Person {
+    name: String
+    films(): [Film]
+  }
+
+  type Film {
+    title: String,
+    producers(): [String]
+    characters(limit: Int): [Person]
+    release_date: Date
+  }
+
+  type Query {
+    film (id: Int): Film
+    person (id: Int): Person
+  }
+`, {
+  Date: {
+    serialize (date) {
+      return new Date(date)
+    }
+  },
+  Person: {
+    films (person) {
+      return loaders.film.loadMany(person.films)
+    }
+  },
+  Film: {
+    producers (film) {
+      return film.producer.split(',')
+    },
+    characters (film, args) {
+      var characters = args.limit
+        ? film.characters.slice(0, args.limit)
+        : film.characters
+
+      return loaders.person.loadMany(characters)
+    }
+  },
+  Query: {
+    film (query, args) {
+      return loaders.film.load(args.id)
+    },
+    person(query, args) {
+      return loaders.person.load(args.id)
+    }
+  },
+})
+
+// use the schema
+schema(`
+  query fetch_film ($id: Int) {
+    film(id: $id) {
+      title
+      producers
+      release_date
+      characters {
+        name
+        films {
+          title
+        }
+      }
+    }
+  }
+`, {
+  id: 1
+}).then(res => console.log(res.data))
+```
+
 ## graphql-js vs graph.ql
 
 Say we want to create a GraphQL schema that looks like this:
@@ -75,24 +159,6 @@ var schema = Schema(`
       return load_film(args.id)
     }
   }
-})
-```
-
-## Working with Variables
-
-After the schema has been created:
-
-```js
-schema(`
-  query fetch_film($id: Int) {
-    film (id: $id) {
-      title
-    }
-  }
-`, {
-  id: 1
-}).then(res => {
-  console.log(res.data)
 })
 ```
 
