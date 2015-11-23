@@ -1,8 +1,8 @@
 {
   "name": "graph.ql",
-  "version": "0.0.1",
-  "description": "Simpler interface for creating and querying GraphQL schemas",
-  "keywords": [],
+  "version": "1.0.0",
+  "description": "Faster and simpler technique for creating and querying GraphQL schemas",
+  "keywords": ["graphql", "schema", "simple", "create"],
   "author": "Matthew Mueller <mattmuelle@gmail.com>",
   "repository": {
     "type": "git",
