@@ -18,5 +18,5 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha"
   },
-  "main": "index"
+  "main": "lib/index.js"
 }

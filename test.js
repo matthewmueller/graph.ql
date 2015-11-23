@@ -1,4 +1,4 @@
-var Create = require('./lib/index.js')
+var Create = require('./')
 
 var query = Create(`
   type Person {
@@ -37,8 +37,8 @@ var query = Create(`
 })
 
 var out = query(`
-  mutation M ($person: PersonInput!) {
-    update_person(person: $person) {
+  query A {
+    person {
       name
     }
   }
