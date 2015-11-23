@@ -36,7 +36,7 @@ var schema = Schema(`
   type Film {
     title: String,
     producers(): [String]
-    characters(limit: Int): [Person]
+    characters (limit: Int): [Person]
     release_date: Date
   }
 
@@ -111,7 +111,7 @@ type Query {
 }
 ```
 
-With [graphql-js](http://github.com/graphql/graphql-js), it would look like this:
+With the official [graphql-js](http://github.com/graphql/graphql-js) library, it would look like this:
 
 ```js
 var graphql = require('graphql')
