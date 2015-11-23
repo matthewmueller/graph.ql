@@ -21,6 +21,9 @@ npm install graph.ql
 ```js
 var Schema = require('graph.ql')
 
+// an object of promises that fetch actual data
+var loaders = require('./loaders')
+
 // create the schema
 var schema = Schema(`
   scalar Date
