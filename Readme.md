@@ -107,7 +107,7 @@ type Film {
 }
 
 type Query {
-  film(id: Int): Film
+  film (id: Int): Film
 }
 ```
 
@@ -144,7 +144,7 @@ var schema = new graphql.GraphQLSchema({
 })
 ```
 
-With `graph.ql`, it looks like this:
+With `graph.ql`, we just need to do this:
 
 ```js
 var schema = Schema(`
@@ -154,7 +154,7 @@ var schema = Schema(`
 
   type Query {
     # Fetch the film by id
-    film(id: Int): Film
+    film (id: Int): Film
   }
 `, {
   Query: {
