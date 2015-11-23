@@ -1,0 +1,22 @@
+{
+  "name": "graph.ql",
+  "version": "0.0.1",
+  "description": "Simpler interface for creating and querying GraphQL schemas",
+  "keywords": [],
+  "author": "Matthew Mueller <mattmuelle@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MatthewMueller/graph.ql.git"
+  },
+  "dependencies": {
+    "debug": "^2.2.0",
+    "graphql": "^0.4.13"
+  },
+  "devDependencies": {
+    "mocha": "^2.3.4"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "main": "index"
+}
