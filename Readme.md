@@ -30,36 +30,36 @@ var schema = Schema(`
 
   type Person {
     name: String
-    films(): [Film]
+    films: [Film]
   }
 
   type Film {
     title: String,
-    producers(): [String]
-    characters (limit: Int): [Person]
+    producers: [String]
+    characters(limit: Int): [Person]
     release_date: Date
   }
 
   type Query {
-    film (id: Int): Film
-    person (id: Int): Person
+    film(id: Int): Film
+    person(id: Int): Person
   }
 `, {
   Date: {
-    serialize (date) {
+    serialize(date) {
       return new Date(date)
     }
   },
   Person: {
-    films (person) {
+    films(person) {
       return loaders.film.loadMany(person.films)
     }
   },
   Film: {
-    producers (film) {
+    producers(film) {
       return film.producer.split(',')
     },
-    characters (film, args) {
+    characters(film, args) {
       var characters = args.limit
         ? film.characters.slice(0, args.limit)
         : film.characters
@@ -68,7 +68,7 @@ var schema = Schema(`
     }
   },
   Query: {
-    film (query, args) {
+    film(query, args) {
       return loaders.film.load(args.id)
     },
     person(query, args) {
@@ -79,7 +79,7 @@ var schema = Schema(`
 
 // use the schema
 schema(`
-  query fetch_film ($id: Int) {
+  query fetch_film($id: Int) {
     film(id: $id) {
       title
       producers
@@ -107,7 +107,7 @@ type Film {
 }
 
 type Query {
-  film (id: Int): Film
+  film(id: Int): Film
 }
 ```
 
@@ -118,17 +118,17 @@ var graphql = require('graphql')
 
 var Film = new graphql.GraphQLObjectType({
   name: 'Film',
-  fields: () => ({
+  fields: {
     title: {
       type: graphql.GraphQLString
     }
-  })
+  }
 })
 
 var schema = new graphql.GraphQLSchema({
   query: new graphql.GraphQLObjectType({
     name: 'Query'
-    fields: () => ({
+    fields: {
       film: {
         type: Film,
         args: {
@@ -137,9 +137,9 @@ var schema = new graphql.GraphQLSchema({
             type: graphql.GraphQLInt
           }
         },
-        resolve: (root, args) => return load_film(args.id)
+        resolve: (root, args) => load_film(args.id)
       }
-    })
+    }
   })
 })
 ```
@@ -154,11 +154,11 @@ var schema = Schema(`
 
   type Query {
     # Fetch the film by id
-    film (id: Int): Film
+    film(id: Int): Film
   }
 `, {
   Query: {
-    film (root, args) {
+    film(root, args) {
       return load_film(args.id)
     }
   }
