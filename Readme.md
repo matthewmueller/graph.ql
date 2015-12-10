@@ -5,7 +5,7 @@
 
 ## Video Course
 
-  If you're interested in diving deeper into GraphQL, I've created a video course called [Building Better APIs with GraphQL](https://www.udemy.com/building-better-apis-with-graphql/?couponCode=RIPREST). Bye bye REST.
+  If you're interested in diving deeper into GraphQL, I've created a video course called [Building Better APIs with GraphQL](https://www.udemy.com/building-better-apis-with-graphql/?couponCode=RIPREST). RIP REST (1996 - 2015).
 
 ## Features
 
