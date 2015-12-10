@@ -3,6 +3,10 @@
 
   Faster and simpler technique for creating and querying GraphQL schemas. 100% compatible with the current GraphQL Schema spec.
 
+## Video Course
+
+  If you're interested in diving deeper into GraphQL, I've created a video course called [Building Better APIs with GraphQL](https://www.udemy.com/building-better-apis-with-graphql/?couponCode=RIPREST). Bye bye REST.
+
 ## Features
 
 - 100% compliance with the current GraphQL schema spec
