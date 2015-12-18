@@ -169,6 +169,20 @@ var schema = Schema(`
 })
 ```
 
+## FAQ
+
+### How do I add descriptions?
+
+- You can add descriptions by placing a comment directly above the field or type. The following shows a comment on a type as well as a comment on a field.
+
+```js
+# Query methods
+type Query {
+  # Fetch the film by id
+  film (id: Int): Film
+}
+```
+
 ## Credits
 
 Thanks to [ForbesLindesay](https://github.com/ForbesLindesay) for his initial work on [graphql-schema-gen](https://github.com/ForbesLindesay/graphql-schema-gen) which laid the groundwork for this module.
