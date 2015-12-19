@@ -39,7 +39,7 @@ var schema = Schema(`
 
   type Film {
     title: String,
-    producers: [String]
+    producers(): [String]
     characters(limit: Int): [Person]
     release_date: Date
   }
