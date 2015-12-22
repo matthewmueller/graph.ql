@@ -7,7 +7,7 @@ var query = Create(`
   }
 
   type Query {
-    person(): Person
+    person(names: [String]): Person
   }
 
   input PersonInput {
@@ -20,7 +20,8 @@ var query = Create(`
   }
 `, {
   Query: {
-    person: function () {
+    person: function (root, args) {
+      console.log(args)
       return {
         name: 'Matt'
       }
@@ -37,16 +38,13 @@ var query = Create(`
 })
 
 var out = query(`
-  query A {
-    person {
+  query Q($names: [String]) {
+    person(names: $names) {
       name
     }
   }
 `, {
-  person: {
-    name: 'Matt',
-    age: 25
-  }
+  names: ['Matt', 'Max'],
 }).then(res => console.log(res))
 
 // console.log(out)
