@@ -1,8 +1,13 @@
 {
   "name": "graph.ql",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Faster and simpler technique for creating and querying GraphQL schemas",
-  "keywords": ["graphql", "schema", "simple", "create"],
+  "keywords": [
+    "graphql",
+    "schema",
+    "simple",
+    "create"
+  ],
   "author": "Matthew Mueller <mattmuelle@gmail.com>",
   "repository": {
     "type": "git",
