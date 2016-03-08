@@ -93,7 +93,7 @@ module.exports = {
 
   Character: {
     resolveType(obj, info) {
-      return obj.id[0] === '1' ? info.schema.getType('Human') : info.schema.getType('Droid')
+      return obj.id[0] === '1' ? 'Human' : info.schema.getType('Droid')
     }
   },
 
