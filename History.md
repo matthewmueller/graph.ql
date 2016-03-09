@@ -1,4 +1,10 @@
 
+1.1.1 / 2016-03-10
+==================
+
+  * Move generators/type.js to generate.js
+  * Consolidate tests, fix query(...)
+
 1.1.0 / 2016-03-10
 ==================
 
