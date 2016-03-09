@@ -389,6 +389,71 @@ describe('Star Wars Query Tests', () => {
   });
 });
 
+/**
+ * Full schema test
+ */
+
+describe('Using query() syntax', () => {
+
+  it('should support query(...)', () => {
+
+    var query = Schema(`
+      type Person {
+        name: String
+        age: Int
+      }
+
+      type Query {
+        person(names: [String]): Person
+      }
+
+      input PersonInput {
+        name: String
+        age: Int!
+      }
+
+      type Mutation {
+        update_person(person: PersonInput): Person
+      }
+    `, {
+      Query: {
+        person: function (root, args) {
+          return {
+            name: 'Matt'
+          }
+        }
+      },
+      Mutation: {
+        update_person: function (m, args) {
+          return {
+            name: args.person.name,
+            age: args.person.age
+          }
+        }
+      }
+    })
+
+    return query(`
+      query Q($names: [String]) {
+        person(names: $names) {
+          name
+        }
+      }
+    `, {
+      names: ['Matt', 'Max'],
+    }).then(res => {
+      assert.deepEqual(res, {
+        "data": {
+          "person": {
+            "name": "Matt"
+          }
+        }
+      })
+    })
+
+  })
+})
+
 
 /**
  * Read
