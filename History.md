@@ -1,4 +1,9 @@
 
+1.2.0 / 2016-03-11
+==================
+
+  * add support for using generators as resolvers
+
 1.1.1 / 2016-03-10
 ==================
 
