@@ -82,7 +82,8 @@ function getHero(root, args) {
   // Artoo is the hero otherwise.
   return artoo;
 }
-function getHuman(root, args) {
+function * getHuman(root, args) {
+  yield wait(100)
   return humanData[args.id];
 }
 function getDroid(root, args) {
@@ -117,4 +118,12 @@ module.exports = {
     droid: getDroid
   }
 
+}
+
+function wait (ms) {
+  return function (fn) {
+    setTimeout(function() {
+      fn()
+    }, ms)
+  }
 }
