@@ -93,7 +93,7 @@ function getDroid(root, args) {
 module.exports = {
 
   Character: {
-    resolveType(obj, info) {
+    resolveType(obj, ctx, info) {
       return obj.id[0] === '1' ? 'Human' : info.schema.getType('Droid')
     }
   },

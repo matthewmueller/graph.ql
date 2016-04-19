@@ -452,6 +452,53 @@ describe('Using query() syntax', () => {
     })
 
   })
+
+  it('should pass root and context value', () => {
+
+    var rootValue = 'root-value';
+    var contextValue = 'context-value';
+
+    var query = Schema(`
+      type Person {
+        id: Int
+      }
+
+      type Query {
+        person(id: Int!): Person
+      }
+
+    `, {
+      Query: {
+        person: function (root, args, ctx, info) {
+          assert.strictEqual(root, rootValue, 'has incorrect root-value');
+          assert.strictEqual(ctx, contextValue, 'has incorrect context-value');
+          return { "id": 1 };
+        }
+      }
+    })
+
+    return query(`
+        query Q($id: Int!) {
+          person(id: $id) {
+            id
+          }
+        }
+      `,
+      { "id": 1 },
+      rootValue,
+      contextValue
+    ).then(res => {
+      assert.deepEqual(res, {
+        "data": {
+          "person": {
+            "id": 1
+          }
+        }
+      });
+    })
+
+  })
+
 })
 
 
