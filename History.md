@@ -1,4 +1,12 @@
 
+2.0.1 / 2016-12-17
+==================
+
+  * Merge pull request #25 from TheGhoul21/master
+  * graphql v 0.7.1 (current latest)
+  * make compatible with ^0.x graphql
+  * add comparison image. thanks @ericclemmons!
+
 2.0.0 / 2016-04-19
 ==================
 
