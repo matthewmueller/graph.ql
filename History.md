@@ -1,4 +1,10 @@
 
+2.0.2 / 2017-02-27
+==================
+
+  * Merge pull request #30 from nl0/patch-1
+  * bump graphql version to 0.9.1
+
 2.0.1 / 2016-12-17
 ==================
 
