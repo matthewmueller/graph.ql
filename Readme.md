@@ -2,7 +2,7 @@
 
 # graph.ql
 
-  Faster and simpler technique for creating and querying GraphQL schemas. 100% compatible with the current GraphQL Schema spec.
+  Faster and simpler technique for creating and querying GraphQL schemas.
 
 ## Video Course
 
@@ -10,7 +10,6 @@
 
 ## Features
 
-- 100% compliance with the current GraphQL schema spec
 - Support for queries, mutations, and subscriptions
 - Input type support
 - Variable support
